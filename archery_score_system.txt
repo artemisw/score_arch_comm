@@ -1,0 +1,42 @@
+A real-time score counting and recording system (v0.1)
+	1.Using CloudMqtt server to inforamtion relay
+	2.python code(mqttClient.py) for listening and counting
+	3.python code(arch_scorer.py) for GUI input score
+	4.Can use any-typing interface for uploading score  
+		including smartphone/tablet/ ... 
+	5. the X/10/M will be counting 
+	
+Usage mathod:
+		1. All the information will send to the mqtt server(CloudMqtt) and be relayed to the counting PC.  
+		2. Each archer will using his/her own input device to upload his/her score
+		3. Based on the ablility/limitation of server, All the archers/mulitple archerys will using the same ID/PW 
+		4. In the MQTT server, each archer will have his/her own "topic", which is the each arrow's score in the singla round 
+		5. For example : "tw/arch_score" is my topic now, i have to upload my socre to this topic,
+		   and countng PC will listen this topic to identify the belonging of senting-in data 
+		6. the input must follow the input format ==> "1.2.3.4.5.6"
+			6.1 using "." as spacer ==> if using "," or " " ==>ERROR STOP!!
+			6.2 the last arrow couldnot add this "."  ==>ERROR STOP!!
+				it should not add "." before the first arrow ,too ==>ERROR STOP!!
+				or exsit and ". ." or ".." ==>ERROR STOP!!	
+			6.3 six arrows in each round, no more and no less 
+				==> if more or less than 6 ==> the entire round will not ne counting!!
+			6.4 either "X" or "x","M" or "m" can be used, but "M" should not be noted as "0" ==> the counting of "M" will be less reality
+			6.5 the system can input 1~10,X,M only
+				using another letter ==> ERROR STOP!!
+				using another number ==> Can work!! but system cannot find it's wrong 
+				
+				
+Need to be inproved
+	1. Need internet(using public mqtt server) 
+		--> can build our mqtt server => using only intranet -->still need wifi/intranet cover
+	
+*	2. The counting program must be listening all-time <- if it's not open when data sent-in, it will miss
+		--> 2.a Change the massage to retaining.	2.b using Qos=2 to make sure solid massage handover
+		
+	3. Coding another input interface with pure typing
+		using mouse to click is too slow and less usefull
+			
+	4. the checking input mechanism most be build
+		To relax the format of input .e.q.: 6.1,6.2 ...
+		Remaining user and letting he/she input again when wrong input happened
+		
