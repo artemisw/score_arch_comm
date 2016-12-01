@@ -117,12 +117,12 @@ def on_publish(client, msgs,mid):
 
 print (tdlist)
 client = mqtt.Client()
-client.username_pw_set('fcctzvbn','jHw6KyrJ1j5B')
+client.username_pw_set('id_here','password_here')
 #client.subscribe("tw/arch_score")
 client.on_connect = on_connect
 client.on_message = on_message
 client.on_publish = on_publish
-client.connect("m13.cloudmqtt.com", 17960, 60)
+client.connect("server_ip_here", server_port_here, 60)
 client.publish("tw/arch_score","0.0.0.0.0.0",0)
 
 
